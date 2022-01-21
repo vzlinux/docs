@@ -269,3 +269,73 @@ To update just the kernel of Virtuozzo Linux, run
     # yum update vzkernel vzkernel-devel
 
 After updating, reboot the server and switch to the new kernel.
+
+## Masking Virtuozzo Linux as CentOS or Redhat Enterprise Linux
+
+As certain software requires specific Linux distributions to run, you can mask Virtuozzo Linux as CentOS or Redhat Enterprise Linux to meet those requirements.
+
+Use the `vz-chameleon-distro` script shipped by default. For example, to mask Virtuozzo Linux as CentOS, run
+
+    # vz-chameleon-distro --enable centos
+    CentOS chameleon mode is enabled
+
+The release information will change accordingly:
+
+    # cat /etc/os-release
+    NAME="CentOS Linux"
+    VERSION="8"
+    ID="centos"
+    ID_LIKE="rhel fedora"
+    VERSION_ID="8"
+    PLATFORM_ID="platform:el8"
+    PRETTY_NAME="CentOS Linux 8"
+    ANSI_COLOR="0;31"
+    CPE_NAME="cpe:/o:centos:centos:8"
+    HOME_URL="https://centos.org/"
+    BUG_REPORT_URL="https://bugs.centos.org/"
+    CENTOS_MANTISBT_PROJECT="CentOS-8"
+    CENTOS_MANTISBT_PROJECT_VERSION="8"
+
+To mask Virtuozzo Linux as Redhat Enterprise Linux, run
+
+    # vz-chameleon-distro --enable rhel
+    RHEL chameleon mode is enabled
+
+The release information will change accordingly:
+
+    # cat /etc/os-release
+    NAME="Red Hat Enterprise Linux"
+    VERSION="8.3 (Ootpa)"
+    ID="rhel"
+    ID_LIKE="fedora"
+    VERSION_ID="8.3"
+    PLATFORM_ID="platform:el8"
+    PRETTY_NAME="Red Hat Enterprise Linux 8.3 (Ootpa)"
+    ANSI_COLOR="0;31"
+    CPE_NAME="cpe:/o:redhat:enterprise_linux:8.3:GA"
+    HOME_URL="https://www.redhat.com/"
+    BUG_REPORT_URL="https://bugzilla.redhat.com/"
+    REDHAT_BUGZILLA_PRODUCT="Red Hat Enterprise Linux 8"
+    REDHAT_BUGZILLA_PRODUCT_VERSION=8.3
+    REDHAT_SUPPORT_PRODUCT="Red Hat Enterprise Linux"
+    REDHAT_SUPPORT_PRODUCT_VERSION="8.3"
+
+To stop masking, run
+
+    # vz-chameleon-distro --disable
+    Chameleon mode is disabled
+
+The release information will be reverted:
+
+    # cat /etc/os-release
+    NAME="Virtuozzo Linux"
+    VERSION="8"
+    ID="virtuozzo"
+    ID_LIKE="rhel fedora"
+    VERSION_ID="8"
+    PLATFORM_ID="platform:el8"
+    PRETTY_NAME="Virtuozzo Linux"
+    ANSI_COLOR="0;31"
+    CPE_NAME="cpe:/o:virtuozzoproject:vzlinux:8"
+    HOME_URL="https://www.vzlinux.org"
+    BUG_REPORT_URL="https://bugs.openvz.org"
